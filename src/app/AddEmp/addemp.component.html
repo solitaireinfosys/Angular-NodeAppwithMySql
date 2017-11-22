@@ -1,0 +1,109 @@
+<div class="container">
+	<h1 class="main-heading">Add Employee From</h1>
+
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a [routerLink]="['/home']">Signout</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Add Employee Form</li>
+		</ol>
+	</nav>
+	<hr/>
+
+	<form name="regForm" #regForm="ngForm" (ngSubmit)="regForm.valid && addEmp()" novalidate>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empName.valid }">
+		            <label for="myEname">Employee Name </label>
+		            <input type="text" class="form-control" name="myEName" [(ngModel)]="model.empName" #empName="ngModel" required />
+		            <div *ngIf="regForm.submitted && !empName.valid" class="help-block">Employee name is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !fatherName.valid }">
+		            <label for="myfname">Father's Name </label>
+		            <input type="text" class="form-control" name="myFname" [(ngModel)]="model.fatherName" #fatherName="ngModel" required />
+		            <div *ngIf="regForm.submitted && !fatherName.valid" class="help-block">Father's name is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="row">
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !bloodGroup.valid }">
+		            <label for="mybloodgroup">Blood Group </label>
+		            <select class="form-control" name="myBloodGroup" [(ngModel)]="model.bloodGroup" #bloodGroup="ngModel" required>
+		            	<option>A+</option>
+						<option>O+</option>
+						<option>B+</option>
+						<option>AB+</option>
+						<option>A-</option>
+						<option>O-</option>
+						<option>B-</option>
+						<option>AB-</option>
+		            </select>
+		            <div *ngIf="regForm.submitted && !bloodGroup.valid" class="help-block">Blood group is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !gender.valid }">
+		            <label for="mygender">Gender </label>
+		            <select class="form-control" name="myGender" [(ngModel)]="model.gender" #gender="ngModel" required>
+		            	<option>Male</option>
+		            	<option>Female</option>
+		            </select>
+		            <div *ngIf="regForm.submitted && !gender.valid" class="help-block">Gender is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empOfficialId.valid }">
+		            <label for="myofficeid">Official Id </label>
+		            <input type="text" class="form-control" name="myOfficeId" [(ngModel)]="model.empOfficialId" #empOfficialId="ngModel" required />
+		            <div *ngIf="regForm.submitted && !empOfficialId.valid" class="help-block">Official e-mail id is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empContactNo.valid }">
+		            <label for="mycontact">Contact Number </label>
+		            <input type="text" class="form-control" name="myContact" [(ngModel)]="model.empContactNo" #empContactNo="ngModel" required />
+		            <div *ngIf="regForm.submitted && !empContactNo.valid" class="help-block">Contact number is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empDepartment.valid }">
+		            <label for="mydepartment">Department </label>
+		            <input type="text" class="form-control" name="myDepartment" [(ngModel)]="model.empDepartment" #empDepartment="ngModel" required />
+		            <div *ngIf="regForm.submitted && !empDepartment.valid" class="help-block">Department is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empDesignation.valid }">
+		            <label for="mydesignation">Designation </label>
+		            <input type="text" class="form-control" name="myDesignation" [(ngModel)]="model.empDesignation" #empDesignation="ngModel" required />
+		            <div *ngIf="regForm.submitted && !empDesignation.valid" class="help-block">Designation is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': regForm.submitted && !empResAddress.valid }">
+		            <label for="myresaddress">Residential Address </label>
+		            <textarea type="text" class="form-control" name="myResAddress" [(ngModel)]="model.empResAddress" #empResAddress="ngModel" required></textarea>
+		            <div *ngIf="regForm.submitted && !empResAddress.valid" class="help-block">Address is required.</div>
+		        </div>
+		    </div>
+		</div>
+		<hr />
+		<div class="form-group" style="text-align: center;">
+			<button type="submit" class="btn btn-outline-success" [disabled]="loading">Add</button>
+			<button type="button" class="btn btn-outline-primary" [routerLink]="['/emplist']">View</button>
+	    </div>
+	</form>
+	<hr/>
+</div>

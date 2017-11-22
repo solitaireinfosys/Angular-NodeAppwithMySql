@@ -1,0 +1,53 @@
+<div class="container">
+	<h1 class="main-heading">Sign-Up Form</h1>
+
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">SignUp Form</li>
+		</ol>
+	</nav>
+	<hr/>
+
+	<form name="signUpForm" #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && signUp()" novalidate>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signUpForm.submitted && !firstName.valid }">
+		            <label for="myFname">First Name </label>
+		            <input type="text" class="form-control" name="myFName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+		            <div *ngIf="signUpForm.submitted && !firstName.valid" class="help-block">First name is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signUpForm.submitted && !lastName.valid }">
+		            <label for="myLname">Last Name </label>
+		            <input type="text" class="form-control" name="myLname" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+		            <div *ngIf="signUpForm.submitted && !lastName.valid" class="help-block">Last name is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signUpForm.submitted && !userName.valid }">
+		            <label for="myUname">User Name </label>
+		            <input type="email" class="form-control" name="myUname" [(ngModel)]="model.userName" #userName="ngModel" required />
+		            <div *ngIf="signUpForm.submitted && !userName.valid" class="help-block">Username is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signUpForm.submitted && !userPassword.valid }">
+		            <label for="myPassword">Password </label>
+		            <input type="password" class="form-control" name="myPassword" [(ngModel)]="model.userPassword" #userPassword="ngModel" required />
+		            <div *ngIf="signUpForm.submitted && !userPassword.valid" class="help-block">Password is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<hr />
+		<div class="form-group" style="text-align: center;">
+			<button type="submit" class="btn btn-success" [disabled]="loading">Sign-Up Now</button>
+	    </div>
+	</form>
+	<hr/>
+</div>

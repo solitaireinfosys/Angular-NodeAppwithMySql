@@ -1,0 +1,36 @@
+<div class="container">
+	<h1 class="main-heading">Sign-In Form</h1>
+
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">SignIn Form</li>
+		</ol>
+	</nav>
+	<hr/>
+
+	<form name="signInForm" #signInForm="ngForm" (ngSubmit)="signInForm.valid && signIn()" novalidate>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signInForm.submitted && !userName.valid }">
+		            <label for="myUname">UserName </label>
+		            <input type="text" class="form-control" name="myUname" [(ngModel)]="model.userName" #userName="ngModel" required />
+		            <div *ngIf="signInForm.submitted && !userName.valid" class="help-block">Username is required.</div>
+		        </div>
+		    </div>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group" [ngClass]="{ 'has-error': signInForm.submitted && !hashPassword.valid }">
+		            <label for="myPassword">Password </label>
+		            <input type="password" class="form-control" name="myPassword" [(ngModel)]="model.hashPassword" #hashPassword="ngModel" required />
+		            <div *ngIf="signInForm.submitted && !hashPassword.valid" class="help-block">Password is required.</div>
+		        </div>
+		    </div>
+		</div>
+
+		<hr />
+		<div class="form-group" style="text-align: center;">
+			<button type="submit" class="btn btn-success" [disabled]="loading">Sign-In Now</button>
+	    </div>
+	</form>
+	<hr/>
+</div>

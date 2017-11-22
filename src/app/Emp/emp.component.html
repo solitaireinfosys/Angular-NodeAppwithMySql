@@ -1,0 +1,121 @@
+<div class="container">
+	<form role="form">
+		<h1>List of Employees</h1>
+
+		<nav aria-label="breadcrumb" role="navigation">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a [routerLink]="['/home']">Signout</a></li>
+				<li class="breadcrumb-item"><a [routerLink]="['/empadd']">Add Employee Form</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Employee List Form</li>
+			</ol>
+		</nav>
+		<hr/>
+		<div *ngIf="totalRecords != 0">
+			<table class="table table-striped">
+				<thead>
+					<th>Employee Name</th>
+					<th>Father's Name</th>
+					<!-- <th>Blood Group</th> -->
+					<!-- <th>Gender</th> -->
+					<th>Official Id</th>
+					<th>Contact Number</th>
+					<th>Department</th>
+					<th>Designation</th>
+					<!-- <th>Residental Address</th> -->
+					<th>Access</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of data | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: totalRecords }">
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpName}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" class="form-control" name="myEName" [(ngModel)]="model.EmpName" #EmpName="ngModel" />
+						</td>
+
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.FatherName}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" class="form-control" name="myFatherName" [(ngModel)]="model.FatherName" #FatherName="ngModel" />
+						</td>
+
+						<!-- <td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.BloodGroup}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<select class="form-control" name="myBloodGroup" [(ngModel)]="model.BloodGroup" #BloodGroup="ngModel">
+								<option>A+</option>
+								<option>O+</option>
+								<option>B+</option>
+								<option>AB+</option>
+								<option>A-</option>
+								<option>O-</option>
+								<option>B-</option>
+								<option>AB-</option>
+							</select>
+						</td> -->
+
+						<!-- <td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.Gender}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<select class="form-control" name="myGender" [(ngModel)]="model.Gender" #Gender="ngModel">
+								<option>Male</option>
+								<option>Female</option>
+							</select>
+						</td> -->
+
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpOfficialId}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" name="myOfficialId" class="form-control" [(ngModel)]="model.EmpOfficialId" #EmpOfficialId="ngModel">
+						</td>
+
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpContactNo}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" name="myContactNo" class="form-control" [(ngModel)]="model.EmpContactNo" #EmpContactNo="ngModel">
+						</td>
+
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpDepartment}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" name="myDepartment" class="form-control" [(ngModel)]="model.EmpDepartment" #EmpDepartment="ngModel">
+						</td>
+
+						<td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpDesignation}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" name="myDesignation" class="form-control" [(ngModel)]="model.EmpDesignation" #EmpDesignation="ngModel">
+						</td>
+						
+						<!-- <td *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId">{{item.EmpResAddress}}</td>
+						<td *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId">
+							<input type="text" name="myResAddress" class="form-control" [(ngModel)]="model.EmpResAddress" #EmpResAddress="ngModel">
+						</td> -->
+
+						<td>
+							<a class="a_edit" (click)="editEmployee(item)" *ngIf="!editMode || item.EmpOfficialId != model.EmpOfficialId"><i class="fa fa-pencil-square-o"></i></a>
+							<a class="a_save" (click)="updateEmployee()" *ngIf="editMode && item.EmpOfficialId == model.EmpOfficialId"><i class="fa fa-check-square-o"></i></a>
+							<span><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+							<a class="a_delete" (click)="deleteEmployee(item.Id)"><i class="fa fa-trash-o"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<pagination-controls style="text-align: center;" *ngIf="totalRecords>pageSize" (pageChange)="p = $event" (click)="loadMore(p)"></pagination-controls>
+		</div>
+		<div *ngIf="totalRecords == 0">
+			<table class="table table-striped">
+				<thead>
+					<th>Employee Name</th>
+					<th>Father's Name</th>
+					<!-- <th>Blood Group</th> -->
+					<!-- <th>Gender</th> -->
+					<th>Official Id</th>
+					<th>Contact Number</th>
+					<th>Department</th>
+					<th>Designation</th>
+					<!-- <th>Residential Address</th> -->
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="6" style="text-align: center;">No Record Found.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<hr/>
+
+	</form>
+</div>
